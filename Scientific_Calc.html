@@ -37,6 +37,8 @@
             margin-bottom: 10px;
             padding: 15px;
             font-size: 24px;
+            border: 3px rgb(10, 1, 1) solid;
+            background-color: rgb(2, 0, 0);
         }
 
         input[type="button"] {
@@ -65,84 +67,79 @@
 </head>
 
 <body class="dark:text-white light:text-black">
-
-    <!--Scientific Calculator web app-->
-
     <div id="calculator">
         <input type="text" id="display" readonly>
         <div class="row">
-            <input type="button" value="MC">
-            <input type="button" value="MR" >
-            <input type="button" value="M+" >
-            <input type="button" value="M-" >
-            <input type="button" value="MS" >
-            <input type="button" value="M*" >
+            <input type="button" value="2ⁿᵈ" onclick="appendToDisplay('2^')">
+            <input type="button" value="π" onclick="appendToDisplay('π')">
+            <input type="button" value="e" onclick="appendToDisplay('e')">
+            <input type="button" value="C" onclick="clearDisplay()">
+            <input type="button" value="←" onclick="deleteLastCharacter()">
         </div>
         <div class="row">
-            <input type="button" value="2ⁿᵈ" >
-            <input type="button" value="π" >
-            <input type="button" value="e" >
-            <input type="button" value="C" >
-            <input type="button" value="←" >
+            <input type="button" value="x²" onclick="appendToDisplay('**2')">
+            <input type="button" value="1/x" onclick="appendToDisplay('1/')">
+            <input type="button" value="|x|" onclick="appendToDisplay('abs(')">
+            <input type="button" value="exp" onclick="appendToDisplay('exp(')">
+            <input type="button" value="mod" onclick="appendToDisplay('%')">
         </div>
         <div class="row">
-            <input type="button" value="x²" >
-            <input type="button" value="1/x" >
-            <input type="button" value="|x|">
-            <input type="button" value="exp" >
-            <input type="button" value="mod" >
+            <input type="button" value="²√x" onclick="appendToDisplay('sqrt(')">
+            <input type="button" value="(" onclick="appendToDisplay('(')">
+            <input type="button" value=")" onclick="appendToDisplay(')')">
+            <input type="button" value="n!" onclick="appendToDisplay('!')">
+            <input type="button" value="÷" onclick="appendToDisplay('/')">
         </div>
         <div class="row">
-            <input type="button" value="²√x">
-            <input type="button" value="&lpar;" >
-            <input type="button" value="&rpar;" >
-            <input type="button" value="n!" >
-            <input type="button" value="&divide;" >
+            <input type="button" value="xʸ" onclick="appendToDisplay('**')">
+            <input id="number" type="button" value="7" onclick="appendToDisplay('7')">
+            <input id="number" type="button" value="8" onclick="appendToDisplay('8')">
+            <input id="number" type="button" value="9" onclick="appendToDisplay('9')">
+            <input type="button" value="X" onclick="appendToDisplay('*')">
         </div>
         <div class="row">
-            <input type="button" value="xʸ" >
-            <input id="number" type="button" value="7" >
-            <input id="number" type="button" value="8" >
-            <input id="number" type="button" value="9" >
-            <input type="button" value="X" >
+            <input type="button" value="10ˣ" onclick="appendToDisplay('10**')">
+            <input id="number" type="button" value="4" onclick="appendToDisplay('4')">
+            <input id="number" type="button" value="5" onclick="appendToDisplay('5')">
+            <input id="number" type="button" value="6" onclick="appendToDisplay('6')">
+            <input type="button" value="−" onclick="appendToDisplay('-')">
         </div>
         <div class="row">
-            <input type="button" value="10ˣ" >
-            <input id="number" type="button" value="4" >
-            <input id="number" type="button" value="5" >
-            <input id="number" type="button" value="6" >
-            <input type="button" value="&minus;" >
+            <input type="button" value="log" onclick="appendToDisplay('log(')">
+            <input id="number" type="button" value="1" onclick="appendToDisplay('1')">
+            <input id="number" type="button" value="2" onclick="appendToDisplay('2')">
+            <input id="number" type="button" value="3" onclick="appendToDisplay('3')">
+            <input type="button" value="+" onclick="appendToDisplay('+')">
         </div>
         <div class="row">
-            <input type="button" value="log" >
-            <input id="number" type="button" value="1" >
-            <input id="number" type="button" value="2" >
-            <input id="number" type="button" value="3" >
-            <input type="button" value="&plus;" >
-        </div>
-        <div class="row">
-            <input type="button" value="ln" >
-            <input id="number" type="button" value="+/-">
-            <input id="number" type="button" value="0" >
-            <input id="number" type="button" value="." >
-            <input type="button" value="&equals;" >
+            <input type="button" value="ln" onclick="appendToDisplay('ln(')">
+            <input id="number" type="button" value="+/-" onclick="appendToDisplay('-1*')">
+            <input id="number" type="button" value="0" onclick="appendToDisplay('0')">
+            <input id="number" type="button" value="." onclick="appendToDisplay('.')">
+            <input type="button" value="=" onclick="calculate()">
         </div>
     </div>
 
 <script>
     function appendToDisplay(value) {
-        //Implement logic to append
+      document.getElementById('display').value += value;
     }
 
     function clearDisplay() {
-       //Implement logic to clear
+      document.getElementById('display').value = '';
+    }
+
+    function deleteLastCharacter() {
+      var display = document.getElementById('display');
+      display.value = display.value.slice(0, -1);
     }
 
     function calculate() {
-        //Implement logic to calculate
-    }
-    function deleteLastCharacter() {
-        //Implement logic to delete last char
+      try {
+        document.getElementById('display').value = eval(document.getElementById('display').value);
+      } catch (error) {
+        document.getElementById('display').value = 'Error';
+      }
     }
 </script>
     <!-- special scripts for integration in MTW gallery - must be placed at the bottom of the HTML after your code -->
